@@ -1,0 +1,34 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div style="text-align:center">
+
+<form >
+  Living Status   <br>
+        <input type="radio" [(ngModel)]="app.status"  name="homeOwner" value="homeOwner">Home Owner<br>
+        <input type="radio" [(ngModel)]="app.status"  name="renting" value="renting">Renting<br>
+        <input type="radio" [(ngModel)]="app.status"  name="other" value="other"> Other<br>
+          Address:  <input type="text" [(ngModel)]="app.address" name="address"> <br>
+          Address 2:  <input type="text" [(ngModel)]="app.address2" name="address2" > <br>
+          City:  <input type="text" [(ngModel)]="app.city" name="city" > <br>
+          ZIP  <input type="text" [(ngModel)]="app.zip" name="zip" > <br>
+          Start Living Date   <input type="date" [(ngModel)]="app.startLivingDT" name="date" > <br>
+          Married  
+          <input type="radio" [(ngModel)]="app.married"  name="myes" value="yes">Yes<br>
+        <input type="radio" [(ngModel)]="app.married"  name="mno" value="no">No<br>
+
+          Veteran  
+          <input type="radio" [(ngModel)]="app.veteran"  name="vyes" value="yes">Yes<br>
+          <input type="radio" [(ngModel)]="app.veteran"  name="vno" value="no">No<br>
+
+          Bank Name  <input name ="bankName" type="text" [(ngModel)]="app.bankName" > <br>
+          Bank Account <input name="bankName" type="text" [(ngModel)]="app.bankAccount" > <br>
+          Bank Ammount<input name="bankAccount"type="text" [(ngModel)]="app.bankAmount" > <br>
+          Ammount to spend on loan<input name="bankAmountToSpend" type="text" [(ngModel)]="app.bankAmountToSpend" > <br>
+          Current Employeer <input name="employeerCurrent" type="text" [(ngModel)]="app.employeerCurrent" > <br>
+          Employment Start Date  <input name = "employeeDT" type="date" [(ngModel)]="app.employeeDT" > <br>
+<button (click)="login()">Add </button>
+          
+</form>
+
+  
+</div>
+
