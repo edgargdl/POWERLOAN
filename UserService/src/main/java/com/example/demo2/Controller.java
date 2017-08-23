@@ -18,7 +18,7 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.*;
 
 @RestController
 @RequestMapping("/Users")
-@CrossOrigin
+@CrossOrigin(origins = "*")
 
 public class Controller {
 	
@@ -32,17 +32,15 @@ public class Controller {
 		User usres = service.createUser(input);
 		usres.add(linkTo(methodOn(Controller.class).createUser(input)).withSelfRel());
 		usres.add(linkTo(methodOn(Controller.class).getUser(input)).withRel("getUser"));
-		
 		return new ResponseEntity<User>(usres,HttpStatus.OK);
-	
-		
 	}
 	
 	@RequestMapping("/{username}")
-	public UserResponse getUser(@RequestBody User user)
-			
+	public HttpEntity<User> getUser(@RequestBody User user)
+	
 	{
 		return service.isAuthenticated(user);
 		
 	}
+	
 }

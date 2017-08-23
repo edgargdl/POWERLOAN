@@ -1,9 +1,15 @@
 package com.example.demo2;
 
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
+
 import java.util.Hashtable;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.ResourceSupport;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.example.model.ResponseStatus;
@@ -32,29 +38,24 @@ public class UsersService {
 		}
 
 	};
-
-	
-	public UserResponse isAuthenticated(User userParm) {
+	public HttpEntity<User> isAuthenticated(User userParm) {
 
 		UserResponse response = new UserResponse();
 		User user = repository.findByUsername(userParm.getUsername());
 		String password = userParm.getPassword();
 		if (user != null) {
 			if (password.equals(user.getPassword())) {
-				response.setStatus(ResponseStatus.AUTHENTICATED);
-				response.setUser(user);
-				return response;
+				
+				user.add(linkTo(methodOn(Controller.class).getUser(user)).withSelfRel());
+				user.add(linkTo(methodOn(Controller.class).createUser(user)).withRel("createUser"));
+				return new ResponseEntity<User>(user,HttpStatus.OK);
+				
 			} else {
-				response.setStatus(ResponseStatus.WRONG_PASSWORD);
-				response.setUser(null);
-				return response;
+				return new ResponseEntity<User>(user,HttpStatus.UNAUTHORIZED);
 			}
 		} else {
-			response.setStatus(ResponseStatus.USER_NOT_EXIST);
-			response.setUser(null);
-			return response;
+			return new ResponseEntity<User>(user,HttpStatus.UNAUTHORIZED);
 		}
 
 	}
-
 }
